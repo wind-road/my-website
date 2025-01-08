@@ -33,6 +33,8 @@ export default function RootLayout({
         {children}
         <Toaster />
         <Cursor />
+        {/* 过渡动画容器 */}
+        <div id='coord' className="absolute top-0 left-0 z-50"></div>
       </body>
     </html>
   );

@@ -2,11 +2,11 @@
 import React from "react";
 import Link from "next/link";
 
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsList } from "@/components/ui/tabs";
 import { Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { usePathname } from "next/navigation";
-
+import RenderTabs from "./tabs";
 interface TabType {
   name: string;
   href: string;
@@ -35,14 +35,6 @@ const tabs: TabType[] = [
     icon: "about",
   },
 ];
-
-const RenderTabs: React.FC<{ tabs: TabType[] }> = ({ tabs }) => {
-  return tabs.map((tab) => (
-    <TabsTrigger key={tab.name} value={tab.name}>
-      <Link href={tab.href}>{tab.name}</Link>
-    </TabsTrigger>
-  ));
-};
 
 const Header: React.FC = () => {
   const pathname = usePathname();

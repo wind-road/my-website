@@ -128,14 +128,12 @@ body {
 }
 */
 
+/*
 ::view-transition-old(pic),
 ::view-transition-new(pic) {
   animation: none;
   mix-blend-mode: normal;
 }
-
-/*
-
 
 
 ::view-transition-image-pair(pic) {

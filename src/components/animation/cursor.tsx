@@ -73,7 +73,7 @@ const Cursor: FC = () => {
       ></div>
       <div
         ref={cursorRef2}
-        className="absolute top-0 left-0 translate-x-[-200px] size-10 bg-[#fff] rounded-full mix-blend-exclusion pointer-events-none transition-[.15s_ease-out]"
+        className="absolute top-0 left-0 translate-x-[-200px] size-10 bg-[#fff] rounded-full z-10 mix-blend-exclusion pointer-events-none transition-[.15s_ease-out]"
       ></div>
     </>
   );

@@ -13,7 +13,7 @@ const Layout: FC<{ children: ReactNode }> = ({ children }) => {
       </div>
       <TransitionProvider>
         <TransitionComponent>
-          <main className="size-full p-4 h-[calc(100vh-4rem)]">{children}</main>
+          <main className="size-full h-[calc(100vh-4rem)]">{children}</main>
         </TransitionComponent>
       </TransitionProvider>
     </div>

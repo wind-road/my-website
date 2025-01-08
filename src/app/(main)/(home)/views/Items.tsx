@@ -7,7 +7,8 @@ import TransitionContext, {
   type TransitionContextType,
 } from "@/context/TransitionContext";
 import Image from "next/image";
-import { flushSync } from "react-dom";
+import Teleport from "@/components/animation/teleport";
+// import { flushSync } from "react-dom";
 
 interface ListType {
   month: string;
@@ -19,9 +20,14 @@ interface ListType {
 
 const Items: FC<{ list: ListType[] }> = ({ list }) => {
   const router = useRouter();
-  const { toggleAnimationType } = useContext(
-    TransitionContext
-  ) as TransitionContextType;
+  const {
+    toggleAnimationType,
+    teleport,
+    setTeleport,
+    teleportOpacity,
+    setTeleportOpacity,
+  } = useContext(TransitionContext) as TransitionContextType;
+
   // 悬停动画
   const liMouseEnter = (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
     gsap.to(e.currentTarget, {
@@ -40,13 +46,13 @@ const Items: FC<{ list: ListType[] }> = ({ list }) => {
     e: React.MouseEvent<HTMLLIElement, MouseEvent>,
     id: string
   ) => {
-    const target = e.currentTarget;
+    // const target = e.currentTarget;
 
-    toggleAnimationType("transition");
+    // toggleAnimationType("transition");
 
-    const img = target.querySelector("img");
+    // const img = target.querySelector("img");
 
-    router.push(`/works/${id}`)
+    router.push(`/works/${id}`);
     // if (img) {
     //   img.style.viewTransitionName = "pic";
     // }
@@ -86,7 +92,16 @@ const Items: FC<{ list: ListType[] }> = ({ list }) => {
           <h3 className="my-3">{item.month}</h3>
           <div className="truncate">{item.title}</div>
           <div className="truncate">{item.description}</div>
-          <div
+          <Teleport
+            teleportId={id.toString()}
+            teleport={teleport}
+            setTeleport={setTeleport}
+            // teleportOpacity={teleport?.id === id.toString() ? teleportOpacity : 1}
+            // setTeleportOpacity={setTeleportOpacity}
+            // size={{
+            //   width: 200,
+            //   height: 200,
+            // }}
             className="w-full aspect-[1/1]"
             style={{
               // backgroundImage: `url(${item.image})`,
@@ -101,7 +116,7 @@ const Items: FC<{ list: ListType[] }> = ({ list }) => {
               src={item.image}
               alt="项目图片"
             />
-          </div>
+          </Teleport>
         </li>
       ))}
     </ul>

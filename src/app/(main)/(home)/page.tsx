@@ -1,6 +1,5 @@
 import TextAnimation from "@/components/animation/text";
 import Items from "./views/Items";
-
 const list = Array.from({ length: 8 }, (_, i) => ({
   month: `${i < 9 ? "0" : ""}${i + 1}.`,
   title: "SONA",
@@ -12,7 +11,7 @@ const list = Array.from({ length: 8 }, (_, i) => ({
 const Page = () => {
   return (
     <>
-      <div className="size-full flex flex-col justify-between py-6">
+      <div className="size-full flex flex-col justify-between p-4 py-6">
         <Items list={list} />
         <TextAnimation text={"WEIPING"} />
       </div>

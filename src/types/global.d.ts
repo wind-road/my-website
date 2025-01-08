@@ -6,3 +6,6 @@ interface Document {
 interface CSSStyleDeclaration {
   viewTransitionName?: string;
 }
+interface Window {
+  navigation: any;
+}
