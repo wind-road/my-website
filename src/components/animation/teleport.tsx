@@ -1,12 +1,10 @@
-import { useRef, FC, ReactNode, useEffect, useState, SetStateAction } from "react";
+import { useRef, FC, ReactNode, useEffect, useState } from "react";
 import { ElementInfo } from "@/context/TransitionContext";
 const Teleport: FC<{
   children: ReactNode;
   teleportId: string;
   teleport: ElementInfo;
   setTeleport: (value: ElementInfo) => void;
-  // teleportOpacity: number;
-  // setTeleportOpacity: (value: SetStateAction<number>) => void;
   className: string;
   style: object;
 }> = ({
@@ -14,15 +12,11 @@ const Teleport: FC<{
   teleportId = new Date().getTime().toString(),
   teleport,
   setTeleport,
-  // teleportOpacity,
-  // setTeleportOpacity,
   ...props
 }) => {
-  const [opacity, setOpacity] = useState(1);
 
   const [size, setSize] = useState({ width: 0, height: 0 });
   const childRef = useRef<HTMLDivElement>(null);
-
   const onClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const currentTarget = e.currentTarget;
     const rect = e.currentTarget.getBoundingClientRect();
@@ -48,25 +42,20 @@ const Teleport: FC<{
   };
 
   useEffect(() => {
-    console.log("teleportId", opacity)
     if (childRef.current) {
-      if (teleport?.id === teleportId) {
-        setOpacity(0);
-        // setTeleportOpacity(0)
-      }
       const rect = childRef.current.getBoundingClientRect();
       // 初始化的宽高存储起来
       setSize({ width: rect.width, height: rect.height });
     }
     return () => {};
-  }, []);
+  }, [teleport, teleportId]);
 
   return (
     <div
       ref={childRef}
       {...props}
       onClick={onClick}
-      style={{ opacity: opacity }}
+      style={{ opacity: 1 }}
       id={"teleport-id-" + teleportId}
     >
       {children}

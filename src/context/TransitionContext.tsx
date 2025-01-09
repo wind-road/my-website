@@ -23,6 +23,8 @@ export interface TransitionContextType {
   setStarport: (value: ElementInfo) => void;
   teleport: ElementInfo;
   setTeleport: (value: ElementInfo) => void;
+  starportOpacity: number;
+  setStarportOpacity: (value: SetStateAction<number>) => void;
   teleportOpacity: number;
   setTeleportOpacity: (value: SetStateAction<number>) => void;
 }
@@ -36,6 +38,7 @@ export const TransitionProvider: FC<{
   const [animationType, setAnimationType] = useState<AnimationType>("toggle");
   const [starport, setStarport] = useState<ElementInfo>();
   const [teleport, setTeleport] = useState<ElementInfo>();
+  const [starportOpacity, setStarportOpacity] = useState(0);
   const [teleportOpacity, setTeleportOpacity] = useState(1);
 
   return (
@@ -59,6 +62,9 @@ export const TransitionProvider: FC<{
 
         teleportOpacity,
         setTeleportOpacity,
+
+        starportOpacity,
+        setStarportOpacity,
       }}
     >
       {children}

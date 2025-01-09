@@ -9,11 +9,9 @@ const Page: FC<{ params: Promise<{ id: string }> }> = async ({ params }) => {
       <h1 className="text-center text-4xl p-4 font-bold">
         item-detail 未完待续
       </h1>
-      {/* <StarportImage id={id} /> */}
       <Starport className="m-auto w-1/2">
         <Image
           className="contain-layout w-full"
-          style={{ viewTransitionName: "pic" }}
           width={200}
           height={200}
           src={`/images/${id}.jpg`}
