@@ -7,14 +7,14 @@ import gsap from "gsap";
 
 import TransitionContext, {
   TransitionContextType,
-  AnimationType,
   ElementInfo,
 } from "@/context/TransitionContext";
 type Node = HTMLElement | null;
 type TransitionPath = "in" | "out" | "none";
 const anmation = () => {
   // 页面切换
-  const enterToggle = (node: Node) => {
+  const enterToggle = (node: Node, toggleCompleted: (v: boolean) => void) => {
+    toggleCompleted(false);
     gsap.set(node, {
       autoAlpha: 0,
       scale: 0.8,
@@ -23,6 +23,9 @@ const anmation = () => {
     gsap
       .timeline({
         paused: true,
+        onComplete: () => {
+          toggleCompleted(true);
+        },
       })
       .to(node, { autoAlpha: 1, xPercent: 0, duration: 0.25 })
       .to(node, { scale: 1, duration: 0.25 })
@@ -58,7 +61,7 @@ const anmation = () => {
     }
   };
   // 页面过渡
-  const enterTransition = (starport: ElementInfo) => {
+  const enterTransition = (starport: ElementInfo, onComplete?: () => void) => {
     const coord = document.body.querySelector("#coord") as HTMLDivElement;
     const coordChildren = coord?.children[0];
     starportBoxOpacity("0");
@@ -70,6 +73,7 @@ const anmation = () => {
         onComplete: () => {
           coord.style.display = "none";
           starportBoxOpacity("1");
+          onComplete && onComplete();
         },
       })
       .to(coordChildren, {
@@ -81,8 +85,7 @@ const anmation = () => {
       })
       .play();
   };
-  const exitTransition = (teleport: ElementInfo) => {
-    console.log("out", teleport);
+  const exitTransition = (teleport: ElementInfo, onComplete?: () => void) => {
     const coord = document.body.querySelector("#coord") as HTMLDivElement;
     const coordChildren = coord?.children[0];
     coord.style.display = "block";
@@ -92,21 +95,9 @@ const anmation = () => {
       .timeline({
         paused: true,
         onComplete: () => {
-          // 设置Teleport会自动更新Teleport组件
-          // setTeleportOpacity(1)
-          // setTeleport({
-          //   id: "",
-          //   end: function (): void {
-          //     throw new Error("Function not implemented.");
-          //   },
-          //   left: 0,
-          //   top: 0,
-          //   width: 0,
-          //   height: 0,
-          //   position: "",
-          // });
           coord.style.display = "none";
           teleportBoxOpacity(teleport.id, "1");
+          onComplete && onComplete();
         },
       })
       .to(coordChildren, {
@@ -117,8 +108,6 @@ const anmation = () => {
         duration: 0.25,
       })
       .play();
-    // const coord = document.body.querySelector("#coord") as HTMLDivElement;
-    // coord.style.display = "none";
   };
 
   return {
@@ -128,56 +117,38 @@ const anmation = () => {
     exitTransition,
   };
 };
-let animationType: AnimationType = "toggle";
-let transitionPath: TransitionPath = "in";
+let transitionPath: TransitionPath = "none";
 const TransitionComponent: FC<{ children: ReactNode }> = ({ children }) => {
   const nodeRef = useRef(null);
   const pathname = usePathname();
 
-  const { starport, teleport } = useContext(
-    TransitionContext
-  ) as TransitionContextType;
+  const { toggleCompleted, starport, setStarport, teleport, setTeleport } =
+    useContext(TransitionContext) as TransitionContextType;
 
   const { enterToggle, exitToggle, enterTransition, exitTransition } =
     anmation();
-
+  if (["/"].includes(pathname)) {
+    transitionPath = "out";
+  } else if (pathname.startsWith("/works/")) {
+    transitionPath = "in";
+  } else {
+    transitionPath = "none";
+  }
+  console.log(pathname, transitionPath, starport, teleport);
   useEffect(() => {
     if (transitionPath === "in" && starport) {
       enterTransition(starport);
-      transitionPath = "none";
     }
   }, [starport, enterTransition]);
 
   useEffect(() => {
     if (transitionPath === "out" && starport && teleport) {
-      exitTransition(teleport);
-      transitionPath = "none";
+      exitTransition(teleport, () => {
+        setStarport(undefined);
+        setTeleport(undefined);
+      });
     }
-  }, [teleport, exitTransition, starport]);
-
-  useEffect(() => {
-    const navigate = (navigateEvent: any) => {
-      const toUrl = new URL(navigateEvent.destination.url);
-      const toPath = toUrl.pathname;
-      const fromPath = location.pathname;
-      if (location.origin !== toUrl.origin) return;
-      if (toPath.startsWith("/works/") || ["/"].includes(toPath)) {
-        animationType = "transition";
-      } else {
-        animationType = "toggle";
-      }
-      if (fromPath === "/" && toPath.startsWith("/works/")) {
-        transitionPath = "in";
-      }
-      if (fromPath.startsWith("/works/") && toPath === "/") {
-        transitionPath = "out";
-      }
-    };
-    window.navigation.addEventListener("navigate", navigate);
-    return () => {
-      window.navigation.removeEventListener("navigate", navigate);
-    };
-  }, []);
+  }, [teleport, exitTransition, starport, setStarport, setTeleport]);
 
   return (
     <SwitchTransition>
@@ -186,15 +157,16 @@ const TransitionComponent: FC<{ children: ReactNode }> = ({ children }) => {
         nodeRef={nodeRef}
         timeout={500}
         onEnter={() => {
-          if (animationType === "toggle") {
-            enterToggle(nodeRef.current);
+          if (transitionPath === "none") {
+            enterToggle(nodeRef.current, toggleCompleted);
           }
         }}
         onExit={() => {
-          if (animationType === "toggle") {
+          if (transitionPath === "none") {
             exitToggle(nodeRef.current);
           }
         }}
+        unmountOnExit
       >
         <div ref={nodeRef} className="size-full">
           {children}

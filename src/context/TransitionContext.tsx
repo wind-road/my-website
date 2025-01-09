@@ -1,5 +1,5 @@
 "use client";
-import React, { createContext, SetStateAction } from "react";
+import React, { createContext } from "react";
 import { useState, type FC } from "react";
 // 切换动画 | 过渡动画
 export type AnimationType = "toggle" | "transition";
@@ -19,14 +19,10 @@ export interface TransitionContextType {
   toggleCompleted: (value: boolean) => void;
   animationType: AnimationType;
   toggleAnimationType: (value: AnimationType) => void;
-  starport: ElementInfo;
-  setStarport: (value: ElementInfo) => void;
-  teleport: ElementInfo;
-  setTeleport: (value: ElementInfo) => void;
-  starportOpacity: number;
-  setStarportOpacity: (value: SetStateAction<number>) => void;
-  teleportOpacity: number;
-  setTeleportOpacity: (value: SetStateAction<number>) => void;
+  starport: ElementInfo | undefined;
+  setStarport: (value: ElementInfo | undefined) => void;
+  teleport: ElementInfo | undefined;
+  setTeleport: (value: ElementInfo | undefined) => void;
 }
 
 const TransitionContext = createContext<TransitionContextType | object>({});
@@ -38,8 +34,6 @@ export const TransitionProvider: FC<{
   const [animationType, setAnimationType] = useState<AnimationType>("toggle");
   const [starport, setStarport] = useState<ElementInfo>();
   const [teleport, setTeleport] = useState<ElementInfo>();
-  const [starportOpacity, setStarportOpacity] = useState(0);
-  const [teleportOpacity, setTeleportOpacity] = useState(1);
 
   return (
     <TransitionContext.Provider
@@ -58,13 +52,7 @@ export const TransitionProvider: FC<{
         setStarport,
 
         teleport,
-        setTeleport,
-
-        teleportOpacity,
-        setTeleportOpacity,
-
-        starportOpacity,
-        setStarportOpacity,
+        setTeleport
       }}
     >
       {children}

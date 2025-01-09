@@ -14,6 +14,7 @@ const Page = () => {
       <div className="size-full flex flex-col justify-between p-4 py-6">
         <Items list={list} />
         <TextAnimation text={"WEIPING"} />
+        {/* <TextAnimation text={"岂不闻天无绝人之路"} /> */}
       </div>
     </>
   );

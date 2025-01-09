@@ -19,7 +19,7 @@ interface ListType {
 
 const Items: FC<{ list: ListType[] }> = ({ list }) => {
   const router = useRouter();
-  const { teleport, setTeleport } = useContext(
+  const { teleport, setTeleport, toggleAnimationType } = useContext(
     TransitionContext
   ) as TransitionContextType;
 
@@ -46,7 +46,10 @@ const Items: FC<{ list: ListType[] }> = ({ list }) => {
           className="gsap-li shrink-0 w-1/6 min-w-[200px] mt-4 transition-all cursor-pointer "
           onMouseEnter={liMouseEnter}
           onMouseLeave={liMouseLeave}
-          onClick={() => router.push(`/works/${(id + 1).toString()}`)}
+          onClick={() => {
+            toggleAnimationType("transition");
+            router.push(`/works/${(id + 1).toString()}`)
+          }}
         >
           <h3 className="my-3">{item.month}</h3>
           <div className="truncate">{item.title}</div>

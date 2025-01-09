@@ -31,6 +31,7 @@ export default async function Page({
   const post: Post = await fetch(`http://localhost:4000/blog/${id}`).then(
     (res) => res.json()
   )
+  console.log(id)
   return (
     <main>
       <h1>{post.title}</h1>
