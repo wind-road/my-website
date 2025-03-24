@@ -16,7 +16,7 @@ const Page = () => {
   const RendererDescription = () => {
     return (
       <div>
-        <h3 className="font-bold g-animation">
+        <h3 className="font-bold">
           淘宝网换肤大赛之《摸鱼神器代码编辑器版淘宝》
         </h3>
         <p className="max-w-[650px] mt-2">

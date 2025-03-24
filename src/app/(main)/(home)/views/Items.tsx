@@ -12,6 +12,7 @@ import Teleport from "@/components/animation/teleport";
 interface ListType {
   month: string;
   title: string;
+  keyword: string;
   image: string;
   description: string;
   link: string;
@@ -53,7 +54,7 @@ const Items: FC<{ list: ListType[] }> = ({ list }) => {
         >
           <h3 className="my-3">{item.month}</h3>
           <div className="truncate">{item.title}</div>
-          <div className="truncate">{item.description}</div>
+          <div className="truncate">{item.keyword}</div>
           <Teleport
             teleportId={id.toString()}
             teleport={teleport}

@@ -8,7 +8,8 @@ const TextAnimation: FC<{
   text: string;
   className?: string;
   enterLoop?: boolean;
-}> = ({ text, className, enterLoop }) => {
+  stop?: boolean;
+}> = ({ text, className, enterLoop, stop = false }) => {
   const spanRefs = useRef<HTMLSpanElement[]>([]);
   const [initTime, setInitTime] = useState(new Date().getTime());
 
@@ -51,8 +52,8 @@ const TextAnimation: FC<{
       });
     };
 
-    initTextAnimation();
-  }, [tl]);
+    !stop && initTextAnimation();
+  }, [tl, stop]);
 
   return (
     <div

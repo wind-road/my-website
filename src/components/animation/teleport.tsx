@@ -3,7 +3,7 @@ import { ElementInfo } from "@/context/TransitionContext";
 const Teleport: FC<{
   children: ReactNode;
   teleportId: string;
-  teleport: ElementInfo;
+  teleport: ElementInfo | undefined;
   setTeleport: (value: ElementInfo) => void;
   className: string;
   style: object;

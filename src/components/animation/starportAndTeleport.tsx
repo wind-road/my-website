@@ -1,46 +1,10 @@
-"use client";
-import { useContext, useRef, useEffect } from "react";
-import type { FC, ReactNode } from "react";
-import { SwitchTransition, Transition } from "react-transition-group";
-import { usePathname } from "next/navigation";
-import gsap from "gsap";
-
 import TransitionContext, {
   TransitionContextType,
   ElementInfo,
-  // AnimationType,
 } from "@/context/TransitionContext";
-// import StarportAndTeleport from "./starportAndTeleport";
-
-type Node = HTMLElement | null;
-type TransitionPath = "in" | "out" | "none";
+import { FC, useContext, useEffect } from "react";
+import gsap from "gsap";
 const anmation = () => {
-  // 页面切换
-  const enterToggle = (node: Node, toggleCompleted: (v: boolean) => void) => {
-    toggleCompleted(false);
-    gsap.set(node, {
-      autoAlpha: 0,
-      scale: 0.8,
-      xPercent: -100,
-    });
-    gsap
-      .timeline({
-        paused: true,
-        onComplete: () => {
-          toggleCompleted(true);
-        },
-      })
-      .to(node, { autoAlpha: 1, xPercent: 0, duration: 0.25 })
-      .to(node, { scale: 1, duration: 0.25 })
-      .play();
-  };
-  const exitToggle = (node: Node) => {
-    gsap
-      .timeline({ paused: true })
-      .to(node, { scale: 0.8, duration: 0.2 })
-      .to(node, { xPercent: 100, autoAlpha: 0, duration: 0.2 })
-      .play();
-  };
   const starportBoxOpacity = (opacity?: string) => {
     const starportBox = document.querySelector(
       ".starport-box"
@@ -112,81 +76,49 @@ const anmation = () => {
       })
       .play();
   };
-
   return {
-    enterToggle,
-    exitToggle,
     enterTransition,
     exitTransition,
   };
 };
-let transitionPath: TransitionPath = "none";
-// let animationType: AnimationType = "transition";
-const TransitionComponent: FC<{ children: ReactNode }> = ({ children }) => {
-  const nodeRef = useRef(null);
-  const pathname = usePathname();
-
+let transitionPath = "none";
+const StarportAndTeleport: FC<{ pathname: string }> = ({ pathname }) => {
   const { toggleCompleted, starport, setStarport, teleport, setTeleport } =
     useContext(TransitionContext) as TransitionContextType;
-
-  const { enterToggle, exitToggle, enterTransition, exitTransition } =
-    anmation();
+  const { enterTransition, exitTransition } = anmation();
   if (["/"].includes(pathname)) {
     transitionPath = "out";
   } else if (pathname.startsWith("/works/")) {
     transitionPath = "in";
   } else {
     transitionPath = "none";
-    // animationType = "toggle";
   }
-  // console.log(pathname, transitionPath, starport, teleport);
-
-  // todo 执行两次页面的可能是 animationType 错误，应该执行了两个动画，比如setState时一次，本身也有过渡动画
-
   useEffect(() => {
     if (transitionPath === "in" && starport) {
-      enterTransition(starport);
+      toggleCompleted(false);
+      enterTransition(starport, () => {
+        toggleCompleted(true);
+      });
     }
-  }, [starport, enterTransition]);
+  }, [starport, enterTransition, toggleCompleted]);
 
   useEffect(() => {
     if (transitionPath === "out" && starport && teleport) {
+      toggleCompleted(false);
       exitTransition(teleport, () => {
         setStarport(undefined);
         setTeleport(undefined);
+        toggleCompleted(true);
       });
     }
-  }, [teleport, exitTransition, starport, setStarport, setTeleport]);
-
-  return (
-    <>
-      <SwitchTransition>
-        <Transition
-          key={pathname}
-          nodeRef={nodeRef}
-          timeout={500}
-          in
-          onEnter={() => {
-            console.log(nodeRef, pathname)
-            if (transitionPath === "none") {
-              enterToggle(nodeRef.current, toggleCompleted);
-            }
-          }}
-          onExit={() => {
-            console.log(nodeRef, pathname)
-            if (transitionPath === "none") {
-              exitToggle(nodeRef.current);
-            }
-          }}
-        >
-          <div ref={nodeRef} className="size-full">
-            {children}
-          </div>
-        </Transition>
-      </SwitchTransition>
-      {/* <StarportAndTeleport transitionPath={transitionPath} /> */}
-    </>
-  );
+  }, [
+    teleport,
+    exitTransition,
+    starport,
+    setStarport,
+    setTeleport,
+    toggleCompleted,
+  ]);
+  return <></>;
 };
-
-export default TransitionComponent;
+export default StarportAndTeleport;
