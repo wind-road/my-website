@@ -13,7 +13,8 @@ const Teleport: FC<{
   children: ReactNode;
   className?: string;
   style?: object;
-}> = ({ children, className, ...props }) => {
+  callBack?: () => void;
+}> = ({ children, className, callBack, ...props }) => {
 
   const { teleport, setStarport } = useContext(
     TransitionContext
@@ -27,9 +28,7 @@ const Teleport: FC<{
       // coord.style.display = coord.style.display === "none" ? "block" : "none";
       setStarport({
         id: teleport?.id,
-        end: function (): void {
-          throw new Error("Function not implemented.");
-        },
+        end: () => callBack && callBack(),
         left: rect.left,
         top: rect.top,
         width: rect.width,
@@ -37,7 +36,7 @@ const Teleport: FC<{
         position: "",
       });
     }
-  }, [teleport, setStarport]);
+  }, [teleport, callBack, setStarport]);
 
   return (
     <div

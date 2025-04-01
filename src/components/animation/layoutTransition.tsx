@@ -76,6 +76,7 @@ const anmation = () => {
         onComplete: () => {
           coord.style.display = "none";
           starportBoxOpacity("1");
+          starport.end()
           onComplete && onComplete();
         },
       })
