@@ -41,18 +41,18 @@ const Header: React.FC = () => {
 
   return (
     <header className="flex justify-between items-center py-4 px-6 border-gray-100">
-      <p className="w-24 font-serif hidden sm:block ">{new Date().toLocaleDateString()}</p>
+      <p className="w-24 font-serif hidden sm:block">{new Date().toLocaleDateString()}</p>
       <Tabs defaultValue={tabs.find(item => item.href === pathname)?.name} className="m-auto">
         <TabsList>
           <RenderTabs tabs={tabs} />
         </TabsList>
       </Tabs>
-      <Link href={"/contact"}>
+      <Link className="hidden sm:block" href={"/contact"}>
         <Button
           variant="animationLink"
           className="w-24"
         >
-          <Mail /> <p className="hidden sm:block">联系我</p>
+          <Mail /> 联系我
         </Button>
       </Link>
     </header>

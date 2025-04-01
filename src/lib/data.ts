@@ -38,11 +38,11 @@ const worksList: ListType[] = [
   {
     id: 4,
     month: "04",
-    title: "SONA",
+    title: "js事件循环",
     image: `/images/4.jpg`,
-    description: "AIC智慧校园微信端是一个提高校园管理效率和便利性的综合性平台。支持单点登录，该平台支持多种角色，在日常工作中 提供了一系列功能和服务。",
-    keyword: "(jQuery+vue2/3)",
-    link: "./src/doc/works/1.md",
+    description: "",
+    keyword: "Event loop",
+    link: "./src/doc/works/4.js事件循环.md",
   },
   {
     id: 5,
