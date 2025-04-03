@@ -5,8 +5,9 @@ import worksList from "@/lib/data";
 const Page = () => {
   return (
     <>
-      <div className="size-full flex flex-col justify-between p-4 py-6">
+      <div className="w-full pt-4">
         <Items list={worksList} />
+        <div className="h-6"></div>
         <TextAnimation text={"WEIPING"} stop />
         {/* <TextAnimation text={"岂不闻天无绝人之路"} /> */}
       </div>

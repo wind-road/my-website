@@ -15,11 +15,9 @@ const TextContent: FC<{
   // 防抖处理滚动事件
   const throttledScroll = debounce(() => {
     const current = markdownRef.current;
-    const scrollParentElement =
-      markdownRef.current?.parentElement?.parentElement;
-
-    if (current && scrollParentElement) {
-      gsap.to(scrollParentElement, {
+    const scrollElement = document.documentElement || document.body;
+    if (current && scrollElement) {
+      gsap.to(scrollElement, {
         scrollTop: current.offsetTop - 72, // 减去 header 高度
         duration: 0.3,
       });

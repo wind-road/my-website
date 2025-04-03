@@ -24,7 +24,7 @@ const Cursor: FC = () => {
     };
     const bodyMousemove = (e: MouseEvent) => {
       window.requestAnimationFrame(function () {
-        setPosition(e.clientX, e.clientY);
+        setPosition(e.pageX, e.pageY);
       });
     };
     const mouseover = (event: MouseEvent) => {
@@ -38,8 +38,8 @@ const Cursor: FC = () => {
         cursorRef2.current!.style.width = `${rect.width + 20}px`;
         cursorRef2.current!.style.height = `${rect.height + 20}px`;
         cursorRef2.current!.style.borderRadius = `${style.borderRadius}`;
-        cursorRef2.current!.style.transform = `translate(${rect.left - 10}px, ${
-          rect.top - 10
+        cursorRef2.current!.style.transform = `translate(${target.offsetLeft}px, ${
+          target.offsetTop + 72 // 72px 是header高度
         }px)`;
       }
     };

@@ -6,6 +6,7 @@ import worksList from "@/lib/data";
 import { randomNumber } from "@/lib/utils";
 import { Eye } from "lucide-react";
 import TextContent from "./views/TextContent";
+import BottomNavigation from "./views/BottomNavigation";
 const Page: FC<{ params: Promise<{ id: string }> }> = async ({ params }) => {
   const id = (await params).id;
   const currentWork = worksList.find((item) => item.id.toString() === id);
@@ -25,6 +26,7 @@ const Page: FC<{ params: Promise<{ id: string }> }> = async ({ params }) => {
         </div>
         <p>{currentWork?.description}</p>
         <TextContent id={id} markdownContent={markdownContent} />
+        <BottomNavigation id={id} />
       </article>
     </div>
   );

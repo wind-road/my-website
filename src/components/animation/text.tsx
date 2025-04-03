@@ -61,7 +61,7 @@ const TextAnimation: FC<{
         "flex justify-center overflow-hidden text-9xl font-serif",
         className
       )}
-      onMouseEnter={enterLoop && restart || undefined}
+      onMouseEnter={(enterLoop && restart) || undefined}
     >
       {text.split("").map((item, index) => (
         <span

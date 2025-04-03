@@ -10,6 +10,10 @@ const nextConfig: NextConfig = {
         hostname: "picsum.photos",
         port: "",
         pathname: "/400/400",
+      },
+      {
+        protocol: "https",
+        hostname: "qcloudimg.tencent-cloud.cn",
       }
     ],
   },
