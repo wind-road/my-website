@@ -94,30 +94,30 @@ const Items: FC<{ list: ListType[] }> = ({ list }) => {
     });
   };
   // 点击按钮时使所有itme left值为0，使用gasp来动画过渡
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    if (scrollRef.current) {
-      const ItemHeads = scrollRef.current.getElementsByClassName("item-head");
-      const ItemImages = scrollRef.current.getElementsByClassName("item-img");
-      const lis = scrollRef.current.getElementsByTagName("li");
-      gsap
-        .timeline()
-        .to(ItemHeads, {
-          opacity: 0,
-          duration: 0.5,
-          ease: "power2.out",
-        })
-        .to(
-          ItemImages,
-          {
-            transform: (idx, item) => {
-              return `translateX(${-item.offsetLeft - 10}px)`;
-            },
-            duration: 0.5,
-          },
-          ">-0.3"
-        );
-    }
-  };
+  // const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  //   if (scrollRef.current) {
+  //     const ItemHeads = scrollRef.current.getElementsByClassName("item-head");
+  //     const ItemImages = scrollRef.current.getElementsByClassName("item-img");
+  //     const lis = scrollRef.current.getElementsByTagName("li");
+  //     gsap
+  //       .timeline()
+  //       .to(ItemHeads, {
+  //         opacity: 0,
+  //         duration: 0.5,
+  //         ease: "power2.out",
+  //       })
+  //       .to(
+  //         ItemImages,
+  //         {
+  //           transform: (idx, item) => {
+  //             return `translateX(${-item.offsetLeft - 10}px)`;
+  //           },
+  //           duration: 0.5,
+  //         },
+  //         ">-0.3"
+  //       );
+  //   }
+  // };
 
   useEffect(() => {
     // 启用悬停横向滚轮滚动
