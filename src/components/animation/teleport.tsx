@@ -2,6 +2,7 @@ import { useRef, FC, ReactNode, useEffect, useState } from "react";
 import { ElementInfo } from "@/context/TransitionContext";
 const Teleport: FC<{
   children: ReactNode;
+  isAnimating: boolean;
   teleportId: string;
   teleport: ElementInfo | undefined;
   setTeleport: (value: ElementInfo) => void;
@@ -9,6 +10,7 @@ const Teleport: FC<{
   style: object;
 }> = ({
   children,
+  isAnimating,
   teleportId = new Date().getTime().toString(),
   teleport,
   setTeleport,
@@ -18,6 +20,7 @@ const Teleport: FC<{
   const [size, setSize] = useState({ width: 0, height: 0 });
   const childRef = useRef<HTMLDivElement>(null);
   const onClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    if (isAnimating) return;
     const currentTarget = e.currentTarget;
     const rect = e.currentTarget.getBoundingClientRect();
     setTeleport({

@@ -168,13 +168,11 @@ const TransitionComponent: FC<{ children: ReactNode }> = ({ children }) => {
           timeout={500}
           in
           onEnter={() => {
-            console.log(nodeRef, pathname)
             if (transitionPath === "none") {
               enterToggle(nodeRef.current, toggleCompleted);
             }
           }}
           onExit={() => {
-            console.log(nodeRef, pathname)
             if (transitionPath === "none") {
               exitToggle(nodeRef.current);
             }

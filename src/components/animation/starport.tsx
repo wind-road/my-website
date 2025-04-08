@@ -25,6 +25,7 @@ const Teleport: FC<{
   useEffect(() => {
     if (childRef.current && teleport) {
       const rect = childRef.current.getBoundingClientRect();
+      // console.log(childRef.current.style.borderRadius)
       // coord.style.display = coord.style.display === "none" ? "block" : "none";
       setStarport({
         id: teleport?.id,

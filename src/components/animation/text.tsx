@@ -58,7 +58,7 @@ const TextAnimation: FC<{
   return (
     <div
       className={cn(
-        "flex justify-center overflow-hidden text-9xl font-serif",
+        "flex justify-center overflow-hidden text-6xl sm:text-9xl font-serif",
         className
       )}
       onMouseEnter={(enterLoop && restart) || undefined}

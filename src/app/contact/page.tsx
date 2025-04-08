@@ -20,17 +20,12 @@ const Page = () => {
               请随时使用这个，方便的时候给我发信息，我期待着你的消息！
             </p>
             <div className="flex flex-col">
-              <Link href={"/test"} className="text-right">
+              <Link href={"https://github.com/wind-road"} className="text-right">
                 <Button variant={"animationLink"} className="h-4">
                   Github
                 </Button>
               </Link>
-              <Link href={"/"} className="text-right">
-                <Button variant={"animationLink"} className="h-4">
-                  Twitter
-                </Button>
-              </Link>
-              <Link href={"/"} className="text-right">
+              <Link href={"https://juejin.cn/user/339080518843703"} className="text-right">
                 <Button variant={"animationLink"} className="h-4">
                   稀土掘金
                 </Button>

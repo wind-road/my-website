@@ -7,7 +7,7 @@ const Page = () => {
     <>
       <div className="w-full pt-4">
         <Items list={worksList} />
-        <div className="h-6"></div>
+        {/* <div className="h-6"></div> */}
         <TextAnimation text={"WEIPING"} stop />
         {/* <TextAnimation text={"岂不闻天无绝人之路"} /> */}
       </div>

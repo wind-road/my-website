@@ -14,12 +14,12 @@ const Layout: FC<{ children: ReactNode }> = ({ children }) => {
       </div>
       <TransitionProvider>
         <TransitionComponent>
-          <main className="size-full p-2">{children}</main>
+          <main className="p-2 box-content">{children}</main>
         </TransitionComponent>
       </TransitionProvider>
       <footer className="w-full flex justify-center my-4">
-        <div className="w-10/12 flex justify-center gap-10">
-          <ul className="flex gap-5">
+        <div className="w-10/12 flex flex-wrap justify-center gap-10">
+          <ul className="flex flex-wrap gap-5">
             <li className="text-gray-500">
               ©{new Date().getFullYear()} winping
             </li>

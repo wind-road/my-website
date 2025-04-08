@@ -2,7 +2,7 @@ import Image from "next/image";
 const Page = () => {
   const RendererImage = () => {
     return (
-      <div className="border p-1 rounded-sm">
+      <div className="border p-1 rounded-sm w-full sm:w-auto">
         <Image
           className="w-full lg:w-[300px] g-animation"
           width={300}
@@ -16,11 +16,9 @@ const Page = () => {
   const RendererDescription = () => {
     return (
       <div>
-        <h3 className="font-bold">
-          淘宝网换肤大赛之《摸鱼神器代码编辑器版淘宝》
-        </h3>
+        <h3 className="font-bold">某某项目title</h3>
         <p className="max-w-[650px] mt-2">
-          《摸鱼神器代码编辑器版淘宝》提供细腻的css样式将淘宝网化身为“摸鱼神器”，即保留了用户的交互体验，也使得淘宝网可以更进一步，拓宽购物场景。
+          某某项目是面向全球中文开发者的技术内容分享与交流平台。我们通过技术文章、沸点、课程、直播等产品和服务,打造一个激发开发者创作灵感,激励开发者沉淀分享,陪伴开发者成长的综和服务
         </p>
       </div>
     );
