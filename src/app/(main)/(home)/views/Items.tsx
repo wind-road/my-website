@@ -10,7 +10,7 @@ import Image from "next/image";
 import Teleport from "@/components/animation/teleport";
 import { Button } from "@/components/ui/button";
 import { RotateCw } from "lucide-react";
-
+import { debounce } from "lodash";
 interface ListType {
   month: string;
   title: string;
@@ -129,7 +129,10 @@ const createDisplayAnimation = (element: HTMLElement, paused = true) => {
       ease: "power2.out",
     });
 };
-
+// 初始化动画，在500ms后执行
+const initAnimation = debounce((cb: () => void) => {
+  cb && cb();
+}, 500);
 const Items: FC<{ list: ListType[] }> = ({ list }) => {
   const router = useRouter();
   const scrollRef = useRef<HTMLUListElement | null>(null);
@@ -152,15 +155,16 @@ const Items: FC<{ list: ListType[] }> = ({ list }) => {
         // 初始化
         scrollRef.current.scrollLeft = scrollPos;
         allIsAnimating = false;
-
+        setIsRouteAnimating((allIsAnimating = window.innerWidth < 640));
         // 创建动画
-        setDisplayAnimation(
-          createDisplayAnimation(
-            scrollRef.current as HTMLElement,
-            // window.innerWidth > 640
-          )
-        );
-        // setIsRouteAnimating((allIsAnimating = window.innerWidth < 640));
+        initAnimation(() => {
+          setDisplayAnimation(
+            createDisplayAnimation(
+              scrollRef.current as HTMLElement,
+              window.innerWidth > 640 // 如果屏幕宽度小于640，则开始动画
+            )
+          );
+        });
       }
     });
   }, []);

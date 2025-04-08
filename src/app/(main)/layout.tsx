@@ -4,7 +4,7 @@ import Header from "@/components/Header";
 import { TransitionProvider } from "@/context/TransitionContext";
 import TransitionComponent from "@/components/animation/layoutTransition";
 import Image from "next/image";
-
+import Link from "next/link";
 const Layout: FC<{ children: ReactNode }> = ({ children }) => {
   return (
     <div className="relative bg-background dark:bg-dark-background">
@@ -23,11 +23,13 @@ const Layout: FC<{ children: ReactNode }> = ({ children }) => {
             <li className="text-gray-500">
               ©{new Date().getFullYear()} winping
             </li>
-            <li>Blog</li>
-            <li>About</li>
-            <li>About</li>
+            <li>
+              <Link href={"/blog"}>Blog</Link>
+            </li>
+            <li><Link href={"/about"}>About</Link></li>
+            <li><Link href={"/contact"}>联系我</Link></li>
           </ul>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 text-gray-500">
             <div>
               <Image
                 src="https://qcloudimg.tencent-cloud.cn/raw/eed02831a0e201b8d794c8282c40cf2e.png"
