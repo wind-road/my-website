@@ -26,8 +26,12 @@ const Layout: FC<{ children: ReactNode }> = ({ children }) => {
             <li>
               <Link href={"/blog"}>Blog</Link>
             </li>
-            <li><Link href={"/about"}>About</Link></li>
-            <li><Link href={"/contact"}>联系我</Link></li>
+            <li>
+              <Link href={"/about"}>About</Link>
+            </li>
+            <li>
+              <Link href={"/contact"}>联系我</Link>
+            </li>
           </ul>
           <div className="flex items-center gap-2 text-gray-500">
             <div>
@@ -38,7 +42,9 @@ const Layout: FC<{ children: ReactNode }> = ({ children }) => {
                 height={15}
               />
             </div>
-            <span>粤公网安备xxxxxxxxxxxxxxx号</span>
+            <span>
+              <Link href={"https://beian.miit.gov.cn"}>粤ICP备2025398590号</Link>
+            </span>
           </div>
         </div>
       </footer>
