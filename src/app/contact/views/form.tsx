@@ -36,8 +36,17 @@ const ContactForm = () => {
       message: "",
     },
   });
-  const onSubmit = () => {
-    console.log(form.getValues());
+  const onSubmit = async () => {
+    const response = await fetch("/api/sendmail", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(form.getValues()),
+    });
+    if (response.ok) {
+      toast({ title: "发送成功", duration: 1000 });
+    } else {
+      toast({ title: "发送失败", description: "请稍后重试", duration: 1000 });
+    }
   };
   return (
     <Form {...form}>

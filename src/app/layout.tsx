@@ -16,8 +16,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "WeiPing",
-  description: "博客网站",
+  title: "心跳的加油站",
+  description: "关于技术vue、react、nodejs、typescript、webpack、vite、npm、yarn、pnpm、git、github、gitlab等个人博客网站",
 };
 
 export default function RootLayout({
