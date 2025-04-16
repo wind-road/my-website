@@ -56,11 +56,11 @@ const worksList: ListType[] = [
   {
     id: 6,
     month: "06",
-    title: "Next.js 的四种渲染方式（BSR、SSG、SSR、ISR）",
+    title: "Next.js 的四种渲染方式",
     image: `/images/6.jpg`,
     description: "",
-    keyword: "(jQuery+vue2/3)",
-    link: "./src/doc/works/6.Next.js 的四种渲染方式（BSR、SSG、SSR、ISR）.md",
+    keyword: "CSR、SSG、SSR、ISR",
+    link: "./src/doc/works/6.Next.js 的四种渲染方式（CSR、SSG、SSR、ISR）.md",
   },
   {
     id: 7,
