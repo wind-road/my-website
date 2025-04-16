@@ -7,7 +7,13 @@ const BackButton = () => {
     <Button
       variant="animationLink"
       className="w-12"
-      onClick={() => router.back()}
+      onClick={() => {
+        if (history.length === 1) {
+          router.push("/", { scroll: false });
+        } else {
+          router.back();
+        }
+      }}
     >
       关闭
     </Button>

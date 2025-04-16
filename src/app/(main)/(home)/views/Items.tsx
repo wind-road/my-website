@@ -145,28 +145,26 @@ const Items: FC<{ list: ListType[] }> = ({ list }) => {
     useState<gsap.core.Timeline | null>(null);
 
   useEffect(() => {
-    window.requestAnimationFrame(() => {
-      if (scrollRef.current) {
-        // 启用悬停横向滚轮滚动
-        enableHoverWheelScroll(scrollRef.current as HTMLElement, {
-          speed: 2, // 更快的滚动速度
-          duration: 0.3, // 更短的动画时间
-        });
-        // 初始化
-        scrollRef.current.scrollLeft = scrollPos;
-        allIsAnimating = false;
-        setIsRouteAnimating((allIsAnimating = window.innerWidth < 640));
-        // 创建动画
-        initAnimation(() => {
-          setDisplayAnimation(
-            createDisplayAnimation(
-              scrollRef.current as HTMLElement,
-              window.innerWidth > 640 // 如果屏幕宽度小于640，则开始动画
-            )
-          );
-        });
-      }
-    });
+    if (scrollRef.current) {
+      // 启用悬停横向滚轮滚动
+      enableHoverWheelScroll(scrollRef.current as HTMLElement, {
+        speed: 2, // 更快的滚动速度
+        duration: 0.3, // 更短的动画时间
+      });
+      // 初始化
+      scrollRef.current.scrollLeft = scrollPos;
+      allIsAnimating = false;
+      setIsRouteAnimating((allIsAnimating = window.innerWidth < 640));
+      // 创建动画
+      initAnimation(() => {
+        setDisplayAnimation(
+          createDisplayAnimation(
+            scrollRef.current as HTMLElement,
+            window.innerWidth > 640 // 如果屏幕宽度小于640，则开始动画
+          )
+        );
+      });
+    }
   }, []);
 
   return (
