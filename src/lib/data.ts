@@ -65,11 +65,11 @@ const worksList: ListType[] = [
   {
     id: 7,
     month: "07",
-    title: "SONA",
+    title: "vue里的provide和inject",
     image: `/images/7.jpg`,
-    description: "某某项目是面向全球中文开发者的技术内容分享与交流平台。我们通过技术文章、沸点、课程、直播等产品和服务,打造一个激发开发者创作灵感,激励开发者沉淀分享,陪伴开发者成长的综和服务",
-    keyword: "(jQuery+vue2/3)",
-    link: "./src/doc/works/4.js事件循环.md",
+    description: "在 Vue 中，provide 和 inject 是一对用于‌ 跨层级组件通信 的 API，主要用于解决深层嵌套组件间数据传递的问题",
+    keyword: "provide、inject",
+    link: "./src/doc/works/7.vue里的provide和inject.md",
   },
   {
     id: 8,
