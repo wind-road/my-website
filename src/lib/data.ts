@@ -74,11 +74,11 @@ const worksList: ListType[] = [
   {
     id: 8,
     month: "08",
-    title: "SONA",
+    title: "浏览器自动填充插件",
     image: `/images/8.jpg`,
-    description: "某某项目是面向全球中文开发者的技术内容分享与交流平台。我们通过技术文章、沸点、课程、直播等产品和服务,打造一个激发开发者创作灵感,激励开发者沉淀分享,陪伴开发者成长的综和服务",
-    keyword: "(jQuery+vue2/3)",
-    link: "./src/doc/works/4.js事件循环.md",
+    description: "",
+    keyword: "plasmo、react、typescript、tailwindcss、radix-ui",
+    link: "./src/doc/works/8.浏览器自动填充插件.md",
  },
   {
     id: 9,
