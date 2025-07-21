@@ -83,11 +83,11 @@ const worksList: ListType[] = [
   {
     id: 9,
     month: "09",
-    title: "SONA",
+    title: "智慧校园分析",
     image: `/images/9.jpg`,
-    description: "某某项目是面向全球中文开发者的技术内容分享与交流平台。我们通过技术文章、沸点、课程、直播等产品和服务,打造一个激发开发者创作灵感,激励开发者沉淀分享,陪伴开发者成长的综和服务",
-    keyword: "(jQuery+vue2/3)",
-    link: "./src/doc/works/4.js事件循环.md",
+    description: "",
+    keyword: "智慧管理、智慧服务",
+    link: "./src/doc/works/9.智慧校园分析.md",
   },
   {
     id: 10,
