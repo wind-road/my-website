@@ -11,7 +11,7 @@ const worksList: ListType[] = [
   {
     id: 1,
     month: "01",
-    title: "瑾琪AIC智慧校园微信端",
+    title: "前端vue动态路由",
     keyword: "beforeEach、addRoute",
     image: `/images/1.jpg`,
     description: "",
