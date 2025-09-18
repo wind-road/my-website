@@ -6,7 +6,16 @@
 该网站尚未完善，后续会进行完善，欢迎提issue、pr。
 或者通过 [联系我](https://code-win.cn/contact)
 
+### 运行环境
+node v20.11.1
+pnpm 9.4.0
+
+### 开始开发
 ```bash
+npm install pnpm # 安装 pnpm
+
+pnpm i # 安装依赖
+
 pnpm dev # 开发命令
 
 pnpm build # 构建命令
